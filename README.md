@@ -1,1 +1,1 @@
-La idea es mostrarles todos los proyectos a lo largo de mi carrera universitaria y proyectos privados
+# EN CONSTRUCCION :D
