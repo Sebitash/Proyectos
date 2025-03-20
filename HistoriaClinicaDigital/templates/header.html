@@ -1,0 +1,53 @@
+<style>
+    .header {
+        height: 72px;
+        padding-left: 2%;
+        padding-right: 2%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        grid-row: 1 / 2;
+        text-align: left;
+        background-color: #205aaa;
+        color: white;
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 0;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .logout-button {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 0.5em;
+        text-align: center;
+        align-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 24px;
+        cursor: pointer;
+        height: 100%;
+    }
+
+    .logout-button:hover {
+        background-color: #3170c8;
+    }
+
+</style>
+
+
+<div class="header">
+    <div class="header-title">
+        Historia Clínica Digital
+    </div>
+    <div class="logout-button" hx-get="/logout"
+         hx-target="body"
+         hx-swap="outerHTML"
+         hx-push-url="true">
+        <div>
+            Cerrar Sesión
+        </div>
+        <i class="fa-solid fa-power-off"></i>
+    </div>
+</div>

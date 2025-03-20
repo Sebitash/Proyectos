@@ -1,0 +1,290 @@
+<head>
+    <script src="https://unpkg.com/htmx.org@2.0.2"
+            integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ"
+            crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+    <style>
+
+    .bar-button:hover {
+            background-color: #3170c8;
+        }
+
+        .bar-button {
+            cursor: pointer;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bar {
+            grid-column: 1 / 2;
+            background-color: #437ed2;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            color: white;
+            justify-content: space-between;
+        }
+
+        .control-button {
+            background-color: #437ed2;
+            border: none;
+            font-family: inherit;
+            padding: 15px;
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: medium;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: grid;
+            grid-template-rows: 1fr 9fr;
+            grid-template-columns: 1fr;
+            background-color: #eeeeee;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 5fr;
+            border: 1px;
+            margin-top: -18px;
+        }
+
+        .home-container {
+            display: flex;
+            grid-template-columns: 1fr 5fr;
+            border: 1px;
+            margin-top: -18px;
+            align-items: center;
+            justify-content: center;
+            gap: 8rem;
+        }
+
+        .behaves-like-body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: grid;
+            grid-template-rows: 1fr 9fr;
+            grid-template-columns: 1fr;
+            background-color: #eeeeee;
+        }
+
+        .data {
+            grid-column: 2 / 3;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title {
+            margin-left: 20px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .profile-data {
+            border: 1px solid rgb(172, 172, 172);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .value {
+            color: rgb(131, 131, 131);
+        }
+
+        .name {
+            font-size: x-large;
+            font-weight: bold;
+        }
+
+        .field {
+            font-weight: bold;
+        }
+
+        .personal-info {
+            border: 1px solid rgb(172, 172, 172);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            margin-top: 0;
+        }
+
+        .personal-data-controls {
+
+            border-radius: 10px;
+
+            margin-bottom: 0px;
+            margin-right: 20px;
+            display: flex;
+            gap: 15px;
+            flex-direction: row-reverse;
+        }
+
+        .personal-data-container {
+            border: 1px solid rgb(172, 172, 172);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            margin-top: 0px;
+        }
+
+        .info-container {
+            display: grid;
+            margin: 10px;
+            gap: 15px;
+            grid-template-columns: auto auto auto auto auto auto auto auto;
+        }
+
+        .control-button-no-fill {
+            background-color: #eeeeee;
+            border: black;
+            font-family: inherit;
+            padding: 15px;
+            border-radius: 15px;
+            color: black;
+            font-weight: bold;
+            box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+            transition: all 0.3s ease;
+            font-size: medium;
+        }
+
+        .control-button:hover {
+            background-color: #205aaa;
+            cursor: pointer;
+        }
+
+        .control-button-no-fill:hover {
+            background-color: #d9d7d7;
+            cursor: pointer;
+        }
+
+        .datos-personales-input {
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            background-color: white;
+            grid-column: 2/3;
+        }
+
+        .datos-personales-input:focus {
+            background-color: #f9fbc6;
+            outline: none;
+        }
+
+        .personal-info-title {
+            grid-column: 1/2;
+            font-weight: bold;
+        }
+
+        .personal-info-value {
+            grid-column: 2/3;
+        }
+
+
+
+        .data {
+            grid-column: 2 / 3;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title {
+            margin-left: 20px;
+        }
+
+        .profile-data {
+            border: 1px solid rgb(172, 172, 172);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .value {
+            color: rgb(131, 131, 131);
+        }
+
+        .name {
+            font-size: x-large;
+            font-weight: bold;
+        }
+
+        .field {
+            font-weight: bold;
+        }
+
+    </style>
+
+    <div id="header"
+         hx-get="/header"
+         hx-trigger="load"
+         hx-swap="outerHTML"></div>
+    <div class="container">
+        <div id="sidebar"
+             hx-get="/sidebar"
+             hx-trigger="load"
+             hx-swap="outerHTML"></div>
+        <div id="datos-container" class="data">
+	<div class="title">
+    	<h1>Datos Personales</h1>
+	</div>
+	<div class="personal-data-container" hx-target="#datos-container" hx-swap="outerHTML">
+	<form hx-put="/datos_personales_guardar">
+       	<div class="personal-info">
+			<div class="name">Cargar Informacion Personal</div>
+        		<div class="info-container">
+					<div class="personal-info-title">Nombre</div>
+					<input class="datos-personales-input" type="name" name="name" value={{.personalInfo.Name}}>
+					<div class="personal-info-title">Ciudad</div>
+					<input class="datos-personales-input" type="city" name="city" value={{.personalInfo.City}}>
+					<div class="personal-info-title">Peso (kg)</div>
+					<input class="datos-personales-input" type="weight" name="weight" value={{.personalInfo.Weight}}>
+					<div class="personal-info-title">Altura (m)</div>
+					<input class="datos-personales-input" type="height" name="height" value={{.personalInfo.Height}}>
+					<div class="personal-info-title">Grupo sanguíneo</div>
+					<select name="bloodtype" class="datos-personales-input" type="bloodtype" style="cursor: pointer;">
+						<option value="O-">O-</option>
+						<option value="O+">O+</option>
+						<option value="A-">A-</option>
+						<option value="A+">A+</option>
+						<option value="B-">B-</option>
+						<option value="B+">B+</option>
+						<option value="AB-">AB-</option>
+						<option value="AB+">AB+</option>
+						<option value="{{.personalInfo.BloodType}}" selected>{{.personalInfo.BloodType}}</option>
+					</select>
+					<div class="personal-info-title">Enfermedades</div>
+					<input class="datos-personales-input" type="conditions" name="conditions" value={{.personalInfo.Conditions}}>
+					<div class="personal-info-title">Alergias</div>
+					<input class="datos-personales-input" type="allergies" name="allergies" value={{.personalInfo.Allergies}}>
+					<div class="personal-info-title">Medicaciones</div>
+					<input class="datos-personales-input" type="medications" name="medications" value={{.personalInfo.Medications}}>
+        	    </div>
+        	</div>
+        	<div class="personal-data-controls">
+        	    <button type="submit" class="control-button">Guardar Datos</button>
+        	</div>
+		</div>
+	</form>
+</div>
+	</div>
+</div>
+</div>
+</body>
+
+</html>

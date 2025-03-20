@@ -1,0 +1,111 @@
+<head>
+    <script src="https://unpkg.com/htmx.org@2.0.2"
+            integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+      <style>
+
+      .body{
+        display: grid;
+        grid-template-rows: 1fr 9fr;
+        grid-template-columns: 1fr;
+        font-family:  sans-serif;
+        background-color: #eeeeee;
+      }
+
+      .login-container{
+        min-width: 25rem;
+        grid-row: 2 / 3;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        width: 30%;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        padding: 5%;
+        margin-top: -18px;
+        background-color: white;
+        height: 50%
+      }
+
+      .login-button{
+        background-color: #1877F2;
+        border: 0;
+        color: white;
+        padding: 2%;
+        text-align: center;
+      }
+
+      </style>
+
+
+    <div id="header"
+         hx-get="/header"
+         hx-trigger="load"
+         hx-swap="outerHTML"></div>
+
+    <div class="login-container">
+        <div>
+            <h1>Iniciar sesión</h1>
+            <div style="display: flex; flex-direction: column; font-size: 1.2em; width: 25rem; gap: 5px">
+
+                <form hx-post="/signin"
+                      hx-target="body"
+                      hx-swap="beforeend"
+                      style="display: flex; flex-direction: column; gap: 5px;">
+                    <div style="color: #777777">Email</div>
+                    <input name="username"
+                           style="height: 3em;"
+                           required />
+                    <div style="color: #777777">Contraseña</div>
+                    <input id="password-field"
+                            type="password"
+                            name="password"
+                           style="height: 3em;"
+                           required
+                           placeholder="Contraseña" />
+                    <i class="fas fa-eye toggle-eye" onclick="togglePassword()"></i>
+                    <div style="color: red;">{{.output}}</div>
+                    <button class="login-button"
+                            type="submit"
+                            hx-post="/signin"
+                            hx-target="body"
+                            hx-swap="outerHTML">Iniciar
+                        Sesión
+            </div>
+            </form>
+            <div hx-get="/recover_password"
+                 hx-target="body"
+                 hx-swap="outerHTML"
+                 hx-push-url="true"
+                 style="color: #1877F2; text-decoration: underline; cursor: pointer;">¿Olvidaste tu contraseña?</div>
+            <div hx-get="/signup"
+                 hx-target="body"
+                 hx-swap="outerHTML"
+                 style="background-color: green; border: 0; color: white; padding: 2%; text-align: center;">Crear cuenta
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+            function togglePassword() {
+            const passwordInput = document.getElementById('password-field');
+            const toggleIcon = document.querySelector('.toggle-eye');
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+            toggleIcon.classList.toggle('fa-eye-slash', isPassword);
+            toggleIcon.classList.toggle('fa-eye', !isPassword);
+            }
+
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+{{ range . }}
+<div class="scrollable-item">
+    <div class="item-info">
+        <strong>Nombre: </strong>{{ .Name }}<br>
+        <strong>Archivo: </strong>{{ .Filename }}<br>
+        <strong>Fecha de estudio: </strong>{{ .Date }}<br>
+        <strong>Campo: </strong>{{ .Field }}<br>
+        <strong>Descripción: </strong>{{ .Description }}<br>
+    </div>
+    <div class="medical-study-options">
+        <button onclick="window.location.href='/medical_recipe/edit?filename={{ .Filename }}'">Editar</button>
+        <a href="/medical_recipe/file?filename={{ .Filename }}" class="button">⬇ Descargar</a>
+    </div>
+</div>
+{{ end }}

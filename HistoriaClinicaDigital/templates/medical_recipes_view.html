@@ -1,0 +1,266 @@
+<head>
+    <script src="https://unpkg.com/htmx.org@2.0.2"
+            integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ"
+            crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: grid;
+            grid-template-rows: 1fr 9fr;
+            grid-template-columns: 1fr;
+            background-color: #eeeeee;
+        }
+/*
+        .header {
+            height: 72px;
+  padding-left: 2%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  grid-row: 1 / 2;
+  text-align: left;
+  background-color: #205aaa;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 0;
+        }
+*/
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 5fr;
+            margin-top: -18px;
+        }
+
+        .data {
+            grid-column: 2 / 3;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title {
+            margin-left: 20px;
+        }
+
+        .profile-data {
+            border: 1px solid rgb(172, 172, 172);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .value {
+            color: rgb(131, 131, 131);
+        }
+
+        .name {
+            font-size: x-large;
+            font-weight: bold;
+        }
+
+        .field {
+            font-weight: bold;
+        }
+
+        .medical-studies {
+            border: 1px solid rgb(172, 172, 172);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            margin-top: 0;
+        }
+
+        .info-container {
+            display: flex;
+            margin: 10px;
+            gap: 40px;
+        }
+
+        .scrollable-container {
+            border: 1px solid rgb(172, 172, 172);
+            border-radius: 10px;
+            padding: 20px;
+            height: 200px;
+            overflow-y: auto;
+        }
+
+        .search-bar-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #searchBar {
+            border-radius: 10px;
+            width: 70%;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        .scrollable-container {
+            width: 70%;
+        }
+
+        .button-add-medical-study {
+            padding: 5px 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+
+        .scrollable-item {
+            display: flex;
+            /* Coloca los hijos en línea horizontal */
+            align-items: stretch;
+            /* Asegura que ambos divs tengan la misma altura */
+            border: 1px solid #ccc;
+            /* Opcional: agrega un borde para visualizar el contenedor */
+            padding: 1em;
+            /* Opcional: agrega padding al contenedor */
+            margin-bottom: 1em;
+            /* Opcional: agrega margen inferior para separar elementos */
+        }
+
+        .item-info {
+            flex: 1;
+            /* Ocupa todo el espacio disponible */
+            margin-right: 1em;
+            /* Espacio entre item-info y medical-study-options */
+            line-height: 2em;
+            /* Ajusta la altura de línea para mejorar la legibilidad */
+        }
+
+        .medical-study-options {
+            display: flex;
+            /* Utiliza Flexbox dentro de este div */
+            flex-direction: column;
+            /* Organiza los elementos en columna */
+            justify-content: space-between;
+            /* Distribuye el espacio equitativamente */
+            width: 100px;
+            /* Ajusta el ancho según tus necesidades */
+        }
+
+        .medical-study-options button,
+        .medical-study-options .button {
+            flex: 1;
+            /* Cada elemento ocupa el mismo espacio vertical */
+            margin: 0.5em 0;
+            /* Espacio entre los botones */
+            padding: 0.5em;
+            /* Espaciado interno para los botones */
+            font-size: 1em;
+            /* Tamaño de fuente consistente */
+            cursor: pointer;
+            /* Cambia el cursor al pasar sobre los botones */
+            text-align: center;
+            /* Centra el texto dentro de los botones */
+            text-decoration: none;
+            /* Elimina subrayado de enlaces */
+            background-color: #007BFF;
+            /* Color de fondo para los botones */
+            color: #fff;
+            /* Color de texto para los botones */
+            border: none;
+            /* Elimina el borde predeterminado */
+            border-radius: 4px;
+            /* Bordes redondeados */
+            transition: background-color 0.3s;
+            /* Transición suave para el hover */
+        }
+
+        .medical-study-options button:hover,
+        .medical-study-options .button:hover {
+            background-color: #0056b3;
+            /* Cambia el color al pasar el mouse */
+        }
+
+    </style>
+
+    <div id="header"
+         hx-get="/header"
+         hx-trigger="load"
+         hx-swap="outerHTML"></div>
+    <div class="container">
+        <div id="sidebar"
+             hx-get="/sidebar"
+             hx-trigger="load"
+             hx-swap="outerHTML"></div>
+        <div class="data">
+            <div class="title">
+                <h1>Recetas</h1>
+            </div>
+            <div class="medical-studies">
+                <div class="name">Recetas</div>
+                <div class="search-bar-container">
+                    <input type="text"
+                           id="searchBar"
+                           name="searchBar"
+                           placeholder="Buscar..."
+                           hx-get="/filter_medical_recipes"
+                           hx-target=".scrollable-container"
+                           hx-trigger="keyup changed delay:300ms"
+                           hx-vals='{ "search": this.value }' />
+                    <button class="button-add-medical-study"
+                            hx-get="/upload_medical_recipe_screen"
+                            hx-target="body"
+                            hx-swap="outerHTML">Agregar</button>
+                </div>
+                <div class="info-container">
+                    <div class="scrollable-container">
+                        {{ range .files }}
+                        <div class="scrollable-item">
+                            <div class="item-info">
+                                <strong>Nombre: </strong>{{ .Name }}<br>
+                                <strong>Archivo: </strong>{{ .Filename }}<br>
+                                <strong>Fecha de estudio: </strong>{{ .Date }}<br>
+                                <strong>Campo: </strong>{{ .Field }}<br>
+                                <strong>Descripción: </strong>{{ .Description }}<br>
+                            </div>
+                            <div class="medical-study-options">
+                                <button
+                                        onclick="window.location.href='/medical_recipe/edit?filename={{ .Filename }}'" title="Editar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#ffffff">
+                                        <path d="M0 0h24v24H0V0z" fill="none"/><path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/>
+                                    </svg>    
+                                </button>
+                                <a href="/medical_recipe/file?filename={{ .Filename }}"
+                                   class="button" title="Descargar">
+                                   <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#ffffff"><g><rect fill="none" height="24" width="24"/></g><g>
+                                        <path d="M18,15v3H6v-3H4v3c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2v-3H18z M17,11l-1.41-1.41L13,12.17V4h-2v8.17L8.41,9.59L7,11l5,5 L17,11z"/></g>
+                                    </svg>
+                                </a>
+                                <button
+                                   hx-post="/confirm_action?action=delete_medical_recipe&filename={{ .Filename }}"
+                                   hx-target="#confirmation-container"
+                                   hx-swap="outerHTML"
+                                   type="submit" title="Eliminar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#ffffff">
+                                            <path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/>
+                                        </svg>
+                               </button>
+                                <div id="confirmation-container"></div>
+                            </div>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

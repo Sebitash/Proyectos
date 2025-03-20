@@ -1,0 +1,53 @@
+
+<div id="datos-container" class="data">
+	<div class="title">
+    	<h1>Datos Personales - Editar</h1>
+	</div>
+	<div class="personal-data-container" hx-target="#datos-container" hx-swap="outerHTML">
+	<form hx-put="/datos_personales_guardar">
+       	<div class="personal-info">
+			<div class="name">Información Personal</div>
+        		<div class="info-container">
+					<div class="personal-info-title">Nombre</div>
+					<input class="datos-personales-input" type="name" name="name" value={{.personalInfo.Name}}>
+					<div class="personal-info-title">Ciudad</div>
+					<input class="datos-personales-input" type="city" name="city" value={{.personalInfo.City}}>
+					<div class="personal-info-title">Peso (kg)</div>
+					<input class="datos-personales-input" type="weight" name="weight" value={{.personalInfo.Weight}}>
+					<div class="personal-info-title">Altura (m)</div>
+					<input class="datos-personales-input" type="height" name="height" value={{.personalInfo.Height}}>
+					<div class="personal-info-title">Grupo sanguíneo</div>
+					<select name="bloodtype" class="datos-personales-input" type="bloodtype" style="cursor: pointer;">
+						<option value="O-">O-</option>
+						<option value="O+">O+</option>
+						<option value="A-">A-</option>
+						<option value="A+">A+</option>
+						<option value="B-">B-</option>
+						<option value="B+">B+</option>
+						<option value="AB-">AB-</option>
+						<option value="AB+">AB+</option>
+						<option value="{{.personalInfo.BloodType}}" disabled selected style="display: none;">{{.personalInfo.BloodType}}</option>
+					</select>
+					<div class="personal-info-title">Enfermedades</div>
+					<input class="datos-personales-input" type="conditions" name="conditions" value={{.personalInfo.Conditions}}>
+					<div class="personal-info-title">Alergias</div>
+					<input class="datos-personales-input" type="allergies" name="allergies" value={{.personalInfo.Allergies}}>
+					<div class="personal-info-title">Medicaciones</div>
+					<input class="datos-personales-input" type="medications" name="medications" value={{.personalInfo.Medications}}>
+        	    </div>
+        	</div>
+        	<div class="personal-data-controls">
+        	    <button type="submit" class="control-button">Guardar Cambios</button>   
+        	    <button 
+        	    hx-get="/datos_personales"
+        	    hx-target="body"
+        	    hx-swap="outerHTML"
+        	    type="button" 
+        	    class="control-button-no-fill">
+        	    	Cancelar
+        	    </button>     	    	        	    	
+        	</div>
+		</div>
+	</form>
+</div>
+

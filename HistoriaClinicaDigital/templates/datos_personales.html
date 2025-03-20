@@ -1,0 +1,43 @@
+<div id="datos-container" class="data">
+            <div class="title">
+                <h1>Datos Personales</h1>
+            </div>
+            <div class="personal-data-container">
+        	    <div class="personal-info">
+        	        <div class="name">Información Personal</div>
+					<div class="info-container">
+						<div class="personal-info-title" >Nombre</div>
+						<div class="personal-info-value" >{{.personalInfo.Name}}</div>
+						<div class="personal-info-title" >Ciudad</div>
+						<div class="personal-info-value" >{{.personalInfo.City}}</div>
+						<div class="personal-info-title" >Peso (kg)</div>
+						<div class="personal-info-value" >{{.personalInfo.Weight}}</div>
+						<div class="personal-info-title" >Altura (m)</div>
+						<div class="personal-info-value" >{{.personalInfo.Height}}</div>
+						<div class="personal-info-title" >Grupo sanguíneo</div>
+						<div class="personal-info-value" >{{.personalInfo.BloodType}}</div>
+						<div class="personal-info-title" >Enfermedades</div>
+						<div class="personal-info-value" >{{.personalInfo.Conditions}}</div>
+						<div class="personal-info-title" >Alergias</div>
+						<div class="personal-info-value" >{{.personalInfo.Allergies}}</div>
+						<div class="personal-info-title" >Medicaciones</div>
+						<div class="personal-info-value" >{{.personalInfo.Medications}}</div>
+					</div>
+				</div>
+
+        	    <div class="personal-data-controls">
+        	    	<button
+						hx-get="/datos_personales_editar"
+						hx-target="#datos-container"
+						hx-swap="outerHTML"
+						type="button"
+						class="control-button">
+        	    			Editar Datos
+        	    	</button>
+        	    	<a href="/datos_personales_exportar" download class="control-button">Exportar PDF</a>
+        	    </div>
+        	    </div>
+		</div>
+	</div>
+</div>
+

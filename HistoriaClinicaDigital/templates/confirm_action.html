@@ -1,0 +1,53 @@
+<style>
+    .button {
+        flex: 1;
+        /* Cada elemento ocupa el mismo espacio vertical */
+        margin: 0.5em 0;
+        /* Espacio entre los botones */
+        padding: 0.5em;
+        /* Espaciado interno para los botones */
+        font-size: 1em;
+        /* Tamaño de fuente consistente */
+        cursor: pointer;
+        /* Cambia el cursor al pasar sobre los botones */
+        text-align: center;
+        /* Centra el texto dentro de los botones */
+        text-decoration: none;
+        /* Elimina subrayado de enlaces */
+        background-color: #007BFF;
+        /* Color de fondo para los botones */
+        color: #fff;
+        /* Color de texto para los botones */
+        border: none;
+        /* Elimina el borde predeterminado */
+        border-radius: 4px;
+        /* Bordes redondeados */
+        transition: background-color 0.3s;
+        /* Transición suave para el hover */
+    }
+
+</style>
+
+<div id="confirmation-container">
+    <div style="position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 20px; border-radius: 5px; text-align: center;">
+            <p>¿Seguro que quieres realizar esta acción?</p>
+            <form hx-post="/perform_action?action={{ .action }}&filename={{ .filename }}" hx-target="body" hx-swap="outerHTML">
+                <input type="hidden" name="name" value="{{.name}}">
+                <input type="hidden" name="type" value="{{.type}}">
+                <input type="hidden" name="description" value="{{.description}}">
+                <input type="hidden" name="date" value="{{.date}}">
+                <input type="hidden" name="city" value="{{.city}}">
+                <input type="hidden" name="weight" value="{{.weight}}">
+                <input type="hidden" name="height" value="{{.height}}">
+                <input type="hidden" name="bloodtype" value="{{.bloodtype}}">
+                <input type="hidden" name="conditions" value="{{.conditions}}">
+                <input type="hidden" name="allergies" value="{{.allergies}}">
+                <input type="hidden" name="medications" value="{{.medications}}">
+                <input type="hidden" name="field" value="{{.field}}">
+                <button class="button" hx-get="/cancel_action" hx-target="#confirmation-container" hx-swap="outerHTML:remove">Cancelar</button>
+                <button class="button" type="submit">Confirmar</button>
+            </form>
+        </div>
+    </div>
+</div>

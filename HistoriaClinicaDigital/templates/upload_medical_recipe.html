@@ -1,0 +1,266 @@
+<head>
+    <script src="https://unpkg.com/htmx.org@2.0.2"
+            integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ"
+            crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .bar-button:hover {
+            background-color: #3170c8;
+        }
+
+        .bar-button {
+            cursor: pointer;
+            padding: 20px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: grid;
+            grid-template-rows: 1fr 9fr;
+            grid-template-columns: 1fr;
+            background-color: #eeeeee;
+        }
+
+        .header {
+            padding-left: 2%;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            grid-row: 1 / 2;
+            text-align: left;
+            background-color: #205aaa;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            margin: 0;
+            font-family: inherit;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 5fr;
+            margin-top: -18px;
+        }
+
+        .bar {
+            grid-column: 1 / 2;
+            background-color: #437ed2;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            color: white;
+            justify-content: space-between;
+        }
+
+        .bar-button {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .data {
+            grid-column: 2 / 3;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title {
+            margin-left: 20px;
+        }
+
+        .profile-data {
+            border: 1px solid rgb(172, 172, 172);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .value {
+            color: rgb(131, 131, 131);
+        }
+
+        .name {
+            font-size: x-large;
+            font-weight: bold;
+        }
+
+        .info-container {
+            display: flex;
+            margin: 10px;
+            gap: 40px;
+        }
+
+        .upload-button {
+            border-radius: 5px;
+            font-size: large;
+            margin: 20px;
+            background-color: #205aaa;
+            border: 0;
+            color: white;
+            padding: 2%;
+            text-align: center;
+        }
+
+        .upload-button:hover {
+            background-color: #174381;
+            cursor: pointer;
+        }
+
+        .upload-button:active {
+            background-color: #13386b;
+            cursor: pointer;
+        }
+
+        .field-name {
+            color: #222222;
+        }
+
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            border-radius: 10px;
+            border: 1px solid rgb(172, 172, 172);
+            margin: 20px;
+        }
+
+        .form-line {
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+            margin-bottom: 10px;
+        }
+
+        input,
+        textarea {
+            /* margin-left: 100px;
+            margin-right: 100px; */
+            background-color: #fafafa;
+            border: 1px solid rgb(123, 123, 123);
+            border-radius: 5px;
+            font-family: 'Inter', 'sans-serif';
+        }
+
+        .multi-field-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .description-box {
+            padding: 100px;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            font-family: 'Inter', 'sans-serif';
+            font-size: 15;
+            color: #888;
+            opacity: 0.7;
+            margin-left: 105px;
+        }
+
+        .file-input {
+            background-color: #eeeeee;
+            border: 0;
+        }
+
+    </style>
+        <div id="header"
+         hx-get="/header"
+         hx-trigger="load"
+         hx-swap="outerHTML"></div>
+    <div class="container">
+        <div id="sidebar"
+             hx-get="/sidebar"
+             hx-trigger="load"
+             hx-swap="outerHTML"></div>
+        <div class="data">
+            <div class="title">
+                <h1>Subir receta</h1>
+            </div>
+            <form class="upload-form"
+                  hx-post="/recipe"
+                  hx-target="body"
+                  hx-swap="outerHTML"
+                  enctype="multipart/form-data">
+                <div class="form-line">
+                    <input name="name"
+                           style="height: 3em;"
+                           required
+                           placeholder="Nombre de la receta" />
+                </div>
+                <div class="
+                           form-line">
+                    <div class="multi-field-container">
+                        <div class="form-field">
+                            <input name="date"
+                                   type="text"
+                                   style="height: 3em; flex-grow: 1;"
+                                   placeholder="Fecha"
+                                   onfocus="this.type='date'"
+                                   onblur="this.type='text'"
+                                   required />
+                        </div>
+                        <div class="form-field">
+                            <select name="field"
+                                    type="field"
+                                    style="cursor: pointer; height: 3em; background-color: #fafafa; border: 1px solid rgb(123, 123, 123); border-radius:5px;">
+                                <option value="Laboratorio">Laboratorio</option>
+                                <option value="Tomografía">Tomografía</option>
+                                <option value="Radiografía">Radiografía</option>
+                                <option value="Ecografía">Ecografía</option>
+                                <option value="Cardiología">Cardiología</option>
+                                <option value="Anatomía Patológica">Anatomía Patológica</option>
+                                <option value="Otro">Otro (indicar en Descripción)</option>
+                                <option value=""
+                                        disabled
+                                        selected
+                                        style="display: none;">Campo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-line">
+                    <textarea name="description"
+                              style="height: 10em;"
+                              placeholder="Descripción"
+                              required></textarea>
+                </div>
+                <div class="form-line">
+                    <div class="field-name">Archivo</div>
+                    <input class="file-input"
+                           name="file"
+                           type="file"
+                           id="file"
+                           style="height: 3em;"
+                           required />
+                </div>
+                <div style="color: red;">{{.output}}</div>
+                <button class="upload-button"
+                        type="submit">Subir
+                    receta
+        </div>
+        </form>
+    </div>
+    </div>
+</body>
+
+</html>

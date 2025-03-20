@@ -1,0 +1,23 @@
+10 10
+Nosferatu (8, 7) 200
+humano (1, 7) 005
+vampiro (1, 1) 204
+agua 20 (7, 1) 315
+estaca (5, 2) 380
+Vanesa (1, 2) 000
+humano CV (7, 8) 050
+bala 11 (2, 2) 360
+vampiro (3, 3) 202
+vampiro (6, 1) 203
+bala 20 (3, 7) 363
+cruz (2, 3) 320
+escopeta (5, 5) 340
+estaca (6, 6) 380
+Vampirella (2, 4) 201
+bala 1 (1, 5) 361
+escopeta (2, 7) 341
+agua 5 (4, 4) 316
+escopeta (3, 4) 342
+humano CV (4, 5) 051
+bala 15 (2, 5) 362
+agua 3 (4, 7) 317
